@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_82.html -->
+<html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uitnodiging babyborrel Clément</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./Uitnodiging babyborrel Clément_files/css2" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF8F3;
+    --paper:#FFFDF9;
+    --powder:#C7DBEA;
+    --powder-dark:#AFC9DD;
+    --powder-shade:#9DBCD4;
+    --ink:#4A6C8C;
+    --ink-deep:#2F4F6C;
+    --gold:#B38B4D;
+    --gold-deep:#8C6A34;
+    --gold-light:#E4CC98;
+    --pink:#D14F82;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:var(--cream);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Cormorant Garamond',serif;
+    overflow-x:hidden;
+    padding:40px 16px;
+    position:relative;
+  }
+  .bgpattern{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    opacity:0.4;
+    background-image:
+      radial-gradient(circle at 12% 18%, #E4EEF5 0, transparent 40%),
+      radial-gradient(circle at 88% 82%, #E4EEF5 0, transparent 40%);
+    pointer-events:none;
+  }
+  .motif{position:fixed;z-index:0;opacity:0.45;pointer-events:none;}
+
+  .backdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(47,79,108,0);
+    z-index:50;
+    pointer-events:none;
+    transition:background .6s ease;
+  }
+  body.opened .backdrop{
+    background:rgba(47,79,108,0.38);
+    pointer-events:auto;
+  }
+
+  .scene{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:380px;
+  }
+
+  .envelope{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/11;
+    cursor:pointer;
+    transition:transform .6s ease, opacity .6s ease;
+  }
+  body.opened .envelope{transform:scale(.92);opacity:.55;}
+
+  .env-rect{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(155deg,var(--powder) 0%,var(--powder-dark) 100%);
+    border-radius:6px;
+    box-shadow:0 20px 40px -14px rgba(47,79,108,0.35);
+  }
+  .env-shade{
+    position:absolute;
+    inset:0;
+    clip-path:polygon(0 100%, 0 46%, 50% 78%, 100% 46%, 100% 100%);
+    background:var(--powder-shade);
+    border-radius:0 0 6px 6px;
+  }
+  .env-flap{
+    position:absolute;
+    inset:0;
+    clip-path:polygon(0 0, 100% 0, 50% 62%);
+    background:linear-gradient(160deg,#DCEAF3 0%,var(--powder) 100%);
+    transform-origin:50% 0%;
+    transform:rotateX(0deg);
+    transition:transform 1s cubic-bezier(.55,-0.15,.3,1.15);
+    backface-visibility:hidden;
+    border-radius:6px 6px 0 0;
+  }
+  body.opened .env-flap{transform:rotateX(-172deg);}
+
+  .env-edge{
+    position:absolute;
+    inset:0;
+    border-radius:6px;
+    border:1px solid rgba(179,139,77,0.45);
+    pointer-events:none;
+  }
+
+  .seal{
+    position:absolute;
+    top:56%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:15%;
+    aspect-ratio:1;
+    min-width:52px;
+    border-radius:50%;
+    background:radial-gradient(circle at 34% 28%, var(--gold-light) 0%, var(--gold) 48%, var(--gold-deep) 100%);
+    box-shadow:
+      0 4px 8px rgba(47,79,108,0.35),
+      inset 0 -3px 5px rgba(0,0,0,0.28),
+      inset 0 2px 3px rgba(255,255,255,0.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:5;
+    transition:opacity .35s ease, transform .35s ease;
+  }
+  body.opened .seal{opacity:0;transform:translate(-50%,-50%) scale(.5);}
+  .seal-ring{
+    position:absolute;
+    inset:12%;
+    border-radius:50%;
+    border:1px solid rgba(140,106,52,0.55);
+  }
+  .seal-c{
+    font-family:'Mrs Saint Delafield',cursive;
+    font-size:min(7vw,30px);
+    color:var(--gold-deep);
+    text-shadow:0.5px 0.5px 0.5px rgba(0,0,0,0.35), -0.5px -0.5px 0.5px rgba(255,255,255,0.4);
+    line-height:1;
+    margin-left:-2px;
+  }
+  .seal-dots{position:absolute;right:22%;top:32%;}
+  .seal-dots span{
+    display:block;
+    width:3.5px;height:3.5px;
+    border-radius:50%;
+    background:var(--pink);
+    box-shadow:0.5px 0.5px 0.5px rgba(0,0,0,0.3);
+    margin-bottom:4px;
+  }
+
+  .hint{
+    text-align:center;
+    font-family:'Caveat',cursive;
+    font-size:19px;
+    color:var(--ink);
+    margin-top:18px;
+    transition:opacity .4s ease;
+  }
+  body.opened .hint{opacity:0;}
+
+  .card{
+    position:fixed;
+    top:50%;
+    left:50%;
+    width:min(88vw,380px);
+    max-height:88vh;
+    overflow:auto;
+    transform:translate(-50%,-42%) scale(.82);
+    background:var(--paper);
+    border:1px solid rgba(179,139,77,0.5);
+    border-radius:6px;
+    padding:38px 28px 30px;
+    text-align:center;
+    z-index:-1;
+    opacity:0;
+    box-shadow:0 30px 60px -18px rgba(47,79,108,0.4);
+    transition:transform .9s cubic-bezier(.2,.85,.25,1) .45s, opacity .7s ease .45s, z-index 0s .4s;
+  }
+  body.opened .card{
+    transform:translate(-50%,-50%) scale(1);
+    opacity:1;
+    z-index:100;
+  }
+
+  .card small.eyebrow{
+    display:block;
+    font-family:'Caveat',cursive;
+    font-size:20px;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  .card h1{
+    font-family:'Mrs Saint Delafield',cursive;
+    font-weight:400;
+    font-size:56px;
+    color:var(--gold);
+    margin:0 0 2px;
+    line-height:1;
+  }
+  .card .surname{
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:.14em;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .card .tagline{
+    font-family:'Caveat',cursive;
+    font-size:21px;
+    color:var(--ink);
+    margin-bottom:18px;
+  }
+  .rule{width:40px;height:1px;background:var(--gold-light);margin:0 auto 18px;}
+  .details{font-size:18px;color:var(--ink-deep);line-height:1.6;margin-bottom:6px;}
+  .details .when{font-size:20px;font-weight:600;margin-bottom:2px;}
+  .details .where{margin-bottom:16px;}
+  .note{font-family:'Caveat',cursive;font-size:19px;color:var(--ink);margin:2px 0 20px;line-height:1.4;}
+  .rsvp-btn{
+    display:inline-block;
+    font-weight:600;
+    font-size:16px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--paper);
+    background:var(--ink-deep);
+    text-decoration:none;
+    padding:12px 30px;
+    border-radius:2px;
+    transition:background .25s ease;
+  }
+  .rsvp-btn:hover{background:var(--ink);}
+  .rsvp-sub{font-size:13px;color:var(--ink);opacity:.75;margin-top:10px;}
+
+  @media (max-width:420px){.card h1{font-size:44px;}}
+</style>
+</head>
+<body>
+
+<div class="bgpattern"></div>
+<div class="backdrop"></div>
+
+<svg class="motif" style="top:8%;left:6%;width:64px;height:64px;" viewBox="0 0 100 100" fill="none" stroke="#B9CFE0" stroke-width="1.4">
+  <ellipse cx="50" cy="35" rx="20" ry="26"></ellipse>
+  <path d="M50 61 L46 90" stroke-linecap="round"></path>
+  <ellipse cx="26" cy="55" rx="14" ry="19"></ellipse>
+  <path d="M26 74 L23 92" stroke-linecap="round"></path>
+</svg>
+<svg class="motif" style="bottom:10%;right:7%;width:50px;height:50px;" viewBox="0 0 100 100" fill="none" stroke="#B9CFE0" stroke-width="1.4">
+  <path d="M50 6 L58 38 L92 38 L64 57 L74 90 L50 70 L26 90 L36 57 L8 38 L42 38 Z" stroke-linejoin="round"></path>
+</svg>
+
+<div class="scene">
+  <div class="envelope" id="envelope" onclick="openEnvelope()">
+    <div class="env-rect"></div>
+    <div class="env-shade"></div>
+    <div class="env-flap"></div>
+    <div class="env-edge"></div>
+    <div class="seal">
+      <div class="seal-ring"></div>
+      <span class="seal-c">C</span>
+      <div class="seal-dots"><span></span><span></span></div>
+    </div>
+  </div>
+  <div class="hint">tik om de envelop te openen</div>
+</div>
+
+<div class="card" id="card">
+  <small class="eyebrow">Kom het met ons vieren</small>
+  <h1>Clément</h1>
+  <div class="surname">Debecker</div>
+  <div class="tagline">Ons eerste wonder wordt getrakteerd</div>
+  <div class="rule"></div>
+  <div class="details">
+    <div class="when">Zaterdag 12 september</div>
+    <div class="where">16u – 19u &nbsp;|&nbsp; Groot Moerhof, Adinkerke</div>
+  </div>
+  <p class="note">We trakteren op een glaasje en een babyborrel<br>vol liefde — we hopen jullie erbij te hebben!</p>
+  <a class="rsvp-btn" href="mailto:gilles@devisch.be?subject=Ik%20kom%20naar%20de%20babyborrel%20van%20Cl%C3%A9ment!&amp;body=Hallo%20Gilles%20en%20Amber%2C%0A%0AWij%20komen%20graag%20langs%20op%2012%20september%20naar%20de%20babyborrel%20van%20Cl%C3%A9ment!%0A%0AMet%20hoeveel%20personen%3A%20%0ANaam%3A%20%0A%0ATot%20dan%21">Ik kom!</a>
+  <div class="rsvp-sub">Klik om te bevestigen via mail</div>
+</div>
+
+<script>
+function openEnvelope(){
+  if(document.body.classList.contains('opened')) return;
+  document.body.classList.add('opened');
+  var env = document.getElementById('envelope');
+  env.style.cursor = 'default';
+  env.onclick = null;
+}
+</script>
+
+
+
+</body></html>
